@@ -5,9 +5,9 @@ import br.ufpb.dcx.rodrigor.projetos.participante.model.CategoriaParticipante;
 import br.ufpb.dcx.rodrigor.projetos.participante.model.Participante;
 import br.ufpb.dcx.rodrigor.projetos.participante.services.ParticipanteService;
 import io.javalin.http.Context;
+import org.bson.types.ObjectId;
 
 public class ParticipanteController {
-
 
     public ParticipanteController() {
     }
@@ -26,12 +26,26 @@ public class ParticipanteController {
     public void adicionarParticipante(Context ctx) {
         ParticipanteService participanteService = ctx.appData(Keys.PARTICIPANTE_SERVICE.key());
         Participante participante = new Participante();
+
+        // Setando os atributos com os valores do formulário
+        participante.setId(new ObjectId()); // Gera um novo ObjectId para o participante
         participante.setNome(ctx.formParam("nome"));
         participante.setSobrenome(ctx.formParam("sobrenome"));
         participante.setEmail(ctx.formParam("email"));
         participante.setTelefone(ctx.formParam("telefone"));
-        System.out.println("categoria recebida:"+ctx.formParam("categoria"));
-        System.out.println("categoria convertida:"+CategoriaParticipante.valueOf(ctx.formParam("categoria")));
+        participante.setMatricula(ctx.formParam("matricula"));
+        participante.setCurso(ctx.formParam("curso"));
+        participante.setPeriodoDeEntrada(ctx.formParam("periodoDeEntrada"));
+        participante.setCpf(ctx.formParam("cpf"));
+        participante.setRg(ctx.formParam("rg"));
+        participante.setOrgaoExpedidor(ctx.formParam("orgaoExpedidor"));
+        participante.setSexo(ctx.formParam("sexo"));
+        participante.setInstagram(ctx.formParam("instagram"));
+        participante.setLinkedIn(ctx.formParam("linkedIn"));
+        participante.setGithub(ctx.formParam("github"));
+        participante.setEndereco(ctx.formParam("endereco"));
+
+        // Definindo a categoria do participante com base no valor do formulário
         participante.setCategoria(CategoriaParticipante.valueOf(ctx.formParam("categoria")));
 
         participanteService.adicionarParticipante(participante);

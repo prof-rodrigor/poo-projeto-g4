@@ -76,7 +76,15 @@
             <input type="text" class="form-control" id="github" name="github">
         </div>
         <div class="mb-3">
-            <label for="endereco" class="form-label">Endereço (País; Estado; Cidade; CEP; Bairro; Rua; Número)</label>
+            <label for="endereco" class="form-label">País</label>
+            <input type="text" class="form-control" id="país" name="endereco" required>
+        </div>
+        <div class="mb-3">
+            <label for="endereco" class="form-label">Estado (Unidade Federativa)</label>
+            <input type="text" class="form-control" id="estado" name="endereco" required>
+        </div>
+        <div class="mb-3">
+            <label for="endereco" class="form-label">Endereço (Cidade, CEP, Bairro, Rua, Número)</label>
             <input type="text" class="form-control" id="endereco" name="endereco" required>
         </div>
         <button type="submit" class="btn btn-primary">Salvar</button>
