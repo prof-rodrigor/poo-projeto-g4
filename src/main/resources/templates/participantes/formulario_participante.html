@@ -30,6 +30,55 @@
                 <option th:each="categoria : ${categorias}" th:value="${categoria.name()}" th:text="${categoria.toString()}"></option>
             </select>
         </div>
+        <!-- Novos Campos -->
+        <div class="mb-3">
+            <label for="matricula" class="form-label">Matrícula</label>
+            <input type="text" class="form-control" id="matricula" name="matricula" required>
+        </div>
+        <div class="mb-3">
+            <label for="curso" class="form-label">Curso</label>
+            <input type="text" class="form-control" id="curso" name="curso" required>
+        </div>
+        <div class="mb-3">
+            <label for="periodoDeEntrada" class="form-label">Período de Entrada</label>
+            <input type="text" class="form-control" id="periodoDeEntrada" name="periodoDeEntrada" required>
+        </div>
+        <div class="mb-3">
+            <label for="cpf" class="form-label">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" required>
+        </div>
+        <div class="mb-3">
+            <label for="rg" class="form-label">RG</label>
+            <input type="text" class="form-control" id="rg" name="rg" required>
+        </div>
+        <div class="mb-3">
+            <label for="orgaoExpedidor" class="form-label">Órgão Expedidor</label>
+            <input type="text" class="form-control" id="orgaoExpedidor" name="orgaoExpedidor" required>
+        </div>
+        <div class="mb-3">
+            <label for="sexo" class="form-label">Sexo</label>
+            <select class="form-select" id="sexo" name="sexo" required>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="instagram" class="form-label">Instagram</label>
+            <input type="text" class="form-control" id="instagram" name="instagram">
+        </div>
+        <div class="mb-3">
+            <label for="linkedIn" class="form-label">LinkedIn</label>
+            <input type="text" class="form-control" id="linkedIn" name="linkedIn">
+        </div>
+        <div class="mb-3">
+            <label for="github" class="form-label">GitHub</label>
+            <input type="text" class="form-control" id="github" name="github">
+        </div>
+        <div class="mb-3">
+            <label for="endereco" class="form-label">Endereço (País; Estado; Cidade; CEP; Bairro; Rua; Número)</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" required>
+        </div>
         <button type="submit" class="btn btn-primary">Salvar</button>
     </form>
 </section>
