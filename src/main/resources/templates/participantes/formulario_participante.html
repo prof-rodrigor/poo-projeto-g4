@@ -12,11 +12,11 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" required>
+                <input type="text" class="form-control" id="nome" name="nome" title="Insira apenas letras." required  pattern="[a-zA-Z\u00C0-\u00FF ]+">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="sobrenome" class="form-label">Sobrenome</label>
-                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
+                <input type="text" class="form-control" id="sobrenome" name="sobrenome" title="Insira apenas letras." required pattern="[a-zA-Z\u00C0-\u00FF ]+">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="telefone" class="form-label">Telefone</label>
-                <input type="text" class="form-control" id="telefone" name="telefone" required>
+                <input type="tel" class="form-control" id="telefone" name="telefone" minlength="10" maxlength="11" title="Insira apenas números." required pattern="\d+">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="categoria" class="form-label">Categoria</label>
@@ -32,10 +32,9 @@
                     <option th:each="categoria : ${categorias}" th:value="${categoria.name()}" th:text="${categoria.toString()}"></option>
                 </select>
             </div>
-            <!-- Novos Campos -->
             <div class="col-md-6 mb-3">
-                <label for="matricula" class="form-label">Matrícula</label>
-                <input type="text" class="form-control" id="matricula" name="matricula" required>
+                <label for="matricula" class="form-label">Matrícula </label>
+                <input type="text" class="form-control" id="matricula" name="matricula" minlength="11" maxlength="11" title="Insira um número de matrícula válido com 11 dígitos." required pattern="\d+">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="curso" class="form-label">Curso</label>
@@ -45,16 +44,16 @@
                 </select>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="periodoDeEntrada" class="form-label">Período de Entrada</label>
-                <input type="text" class="form-control" id="periodoDeEntrada" name="periodoDeEntrada" required>
+                <label for="periodoDeEntrada" class="form-label">Período de Entrada (Ex: XXXX.Y)</label>
+                <input type="text" class="form-control" id="periodoDeEntrada" name="periodoDeEntrada" title="Insira um período válido, ex: 2024.1" required pattern="\d{4}.\d{1}">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="cpf" class="form-label">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" required>
+                <input type="text" class="form-control" id="cpf" name="cpf" minlength="11" maxlength="11" title="Insira um CPF válido." required pattern="\d+">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="rg" class="form-label">RG</label>
-                <input type="text" class="form-control" id="rg" name="rg" required>
+                <input type="text" class="form-control" id="rg" name="rg"  minlength="9" maxlength="9" title="Insira um RG válido." required pattern="\d+">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="orgaoExpedidor" class="form-label">Órgão Expedidor</label>
@@ -76,12 +75,12 @@
                 <input type="text" class="form-control" id="instagram" name="instagram">
             </div>
         </div>
-            <div class="row">
+        <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="linkedIn" class="form-label">LinkedIn</label>
                 <input type="text" class="form-control" id="linkedIn" name="linkedIn">
             </div>
-            </div>
+        </div>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="github" class="form-label">GitHub</label>
@@ -90,33 +89,33 @@
         </div>
         <div class="row">
             <h4 class="mt-2">Endereço: </h4>
-                <div class="col-md-6 mb-3">
-                    <label for="país" class="form-label">País</label>
-                    <input type="text" class="form-control" id="país" name="endereco" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="estado" class="form-label">Estado (Unidade Federativa)</label>
-                    <input type="text" class="form-control" id="estado" name="endereco" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="cidade" class="form-label">Cidade</label>
-                    <input type="text" class="form-control" id="cidade" name="endereco" required>
-                </div>
+            <div class="col-md-6 mb-3">
+                <label for="pais" class="form-label">País</label>
+                <input type="text" class="form-control" id="pais" name="país" title="Insira apenas letras." required pattern="[a-zA-Z\u00C0-\u00FF ]+">>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="estado" class="form-label">Estado (Unidade Federativa)</label>
+                <input type="text" class="form-control" id="estado" name="estado" title="Insira apenas letras." required pattern="[a-zA-Z\u00C0-\u00FF ]+">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="cidade" name="cidade" title="Insira apenas letras." required pattern="[a-zA-Z\u00C0-\u00FF ]+">
+            </div>
             <div class="col-md-6 mb-3">
                 <label for="cep" class="form-label">CEP</label>
-                <input type="text" class="form-control" id="cep" name="endereco" required>
+                <input type="text" class="form-control" id="cep" name="cep"  minlength="8" maxlength="8" title="Insira apenas números." required pattern="\d+">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="bairro" class="form-label">Bairro</label>
-                <input type="text" class="form-control" id="bairro" name="endereco" required>
+                <input type="text" class="form-control" id="bairro" name="bairro" title="Insira apenas letras." required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="rua" class="form-label">Rua</label>
-                <input type="text" class="form-control" id="rua" name="endereco" required>
+                <input type="text" class="form-control" id="rua" name="rua" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="numero" class="form-label">Número</label>
-                <input type="text" class="form-control" id="numero" name="endereco" required>
+                <input type="number" class="form-control" id="numero" name="numero" required>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </div>

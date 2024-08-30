@@ -43,7 +43,13 @@ public class ParticipanteController {
         participante.setInstagram(ctx.formParam("instagram"));
         participante.setLinkedIn(ctx.formParam("linkedIn"));
         participante.setGithub(ctx.formParam("github"));
-        participante.setEndereco(ctx.formParam("endereco"));
+        participante.setPais(ctx.formParam("pais"));
+        participante.setEstado(ctx.formParam("estado"));
+        participante.setCidade(ctx.formParam("cidade"));
+        participante.setCEP(ctx.formParam("cep"));
+        participante.setBairro(ctx.formParam("bairro"));
+        participante.setRua(ctx.formParam("rua"));
+        participante.setNumero(ctx.formParam("numero"));
 
         // Definindo a categoria do participante com base no valor do formulário
         participante.setCategoria(CategoriaParticipante.valueOf(ctx.formParam("categoria")));

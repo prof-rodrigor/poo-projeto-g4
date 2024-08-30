@@ -23,12 +23,25 @@ public class Participante {
     private String instagram;
     private String linkedIn;
     private String GitHub;
-    private String endereco;
+    private String pais;
+    private String estado;
+    private String cidade;
+    private String cep;
+    private String bairro;
+    private String rua;
+    private String numero;
 
 
     // Construtor
 
     public Participante() {
+    }
+
+    public Participante(ObjectId id, String matricula, String periodoDeEntrada, String curso,
+                        String cpf, String rg, String orgaoExpedidor, CategoriaParticipante categoria,
+                        String nome, String sexo, String sobrenome, String telefone, String email, String instagram,
+                        String linkedIn, String gitHub, String pais, String estado, String cidade, String cep,
+                        String bairro, String rua, String numero) {
         this.id = id;
         this.matricula = matricula;
         this.periodoDeEntrada = periodoDeEntrada;
@@ -44,12 +57,26 @@ public class Participante {
         this.email = email;
         this.instagram = instagram;
         this.linkedIn = linkedIn;
-        this.GitHub = GitHub;
-        this.endereco = endereco;
+        this.GitHub = gitHub;
+        this.pais = pais;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.numero = numero;
     }
 
-
     // Getters and Setters
+
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
     public String getMatricula() {
         return matricula;
@@ -99,12 +126,52 @@ public class Participante {
         this.orgaoExpedidor = orgaoExpedidor;
     }
 
+    public CategoriaParticipante getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaParticipante categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getSexo() {
         return sexo;
     }
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getInstagram() {
@@ -127,88 +194,92 @@ public class Participante {
         return GitHub;
     }
 
-    public void setGithub(String GitHub) {
-        this.GitHub = GitHub;
+    public void setGithub(String github) {
+        this.GitHub = github;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getPais() {
+        return pais;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 
-    public ObjectId getId() {
-        return id;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getNome() {
-        return nome;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public String getCep() {
+        return cep;
+    }
+    public void setCEP(String cep) {
+        this.cep = cep;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public String getBairro() {
+        return bairro;
     }
 
-    public String getEmail() {
-        return email;
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getRua() {
+        return rua;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public void setRua(String rua) {
+        this.rua = rua;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public String getNumero() {
+        return numero;
     }
 
-    public CategoriaParticipante getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(CategoriaParticipante categoriaParticipante) {
-        this.categoria = categoriaParticipante;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     @Override
     public String toString() {
         return "Participante{" +
-                "endereco='" + endereco + '\'' +
-                ", GitHub='" + GitHub + '\'' +
-                ", linkedIn='" + linkedIn + '\'' +
-                ", instagram='" + instagram + '\'' +
-                ", email='" + email + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
-                ", sexo='" + sexo + '\'' +
-                ", nome='" + nome + '\'' +
-                ", categoria=" + categoria +
-                ", orgaoExpedidor='" + orgaoExpedidor + '\'' +
-                ", rg='" + rg + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", curso='" + curso + '\'' +
-                ", periodoDeEntrada='" + periodoDeEntrada + '\'' +
+                "id=" + id +
                 ", matricula='" + matricula + '\'' +
-                ", id=" + id +
+                ", periodoDeEntrada='" + periodoDeEntrada + '\'' +
+                ", curso='" + curso + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", rg='" + rg + '\'' +
+                ", orgaoExpedidor='" + orgaoExpedidor + '\'' +
+                ", categoria=" + categoria +
+                ", nome='" + nome + '\'' +
+                ", sexo='" + sexo + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", email='" + email + '\'' +
+                ", instagram='" + instagram + '\'' +
+                ", linkedIn='" + linkedIn + '\'' +
+                ", GitHub='" + GitHub + '\'' +
+                ", pais='" + pais + '\'' +
+                ", estado='" + estado + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", cep='" + cep + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", rua='" + rua + '\'' +
+                ", numero='" + numero + '\'' +
                 '}';
     }
-
 
 }

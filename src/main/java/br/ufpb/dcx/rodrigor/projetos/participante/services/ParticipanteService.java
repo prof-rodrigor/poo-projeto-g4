@@ -83,7 +83,14 @@ public class ParticipanteService extends AbstractService {
         participante.setInstagram(doc.getString("instagram"));
         participante.setLinkedIn(doc.getString("linkedIn"));
         participante.setGithub(doc.getString("github"));
-        participante.setEndereco(doc.getString("endereco"));
+        participante.setPais(doc.getString("pais"));
+        participante.setEstado(doc.getString("estado"));
+        participante.setCidade(doc.getString("cidade"));
+        participante.setCEP(doc.getString("cep"));
+        participante.setBairro(doc.getString("bairro"));
+        participante.setRua(doc.getString("rua"));
+        participante.setNumero(doc.getString("numero"));
+
         return participante;
     }
 
@@ -107,7 +114,13 @@ public class ParticipanteService extends AbstractService {
         doc.put("instagram", participante.getInstagram());
         doc.put("linkedIn", participante.getLinkedIn());
         doc.put("github", participante.getGitHub());
-        doc.put("endereco", participante.getEndereco());
+        doc.put("pais", participante.getPais());
+        doc.put("estado", participante.getEstado());
+        doc.put("cidade", participante.getCidade());
+        doc.put("cep", participante.getCep());
+        doc.put("bairro", participante.getBairro());
+        doc.put("rua", participante.getRua());
+        doc.put("numero", participante.getNumero());
         return doc;
     }
 }
