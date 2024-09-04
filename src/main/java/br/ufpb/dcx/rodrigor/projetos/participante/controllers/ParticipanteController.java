@@ -192,4 +192,11 @@ public class ParticipanteController {
         participanteService.adicionarParticipante(participante);
         ctx.redirect("/participantes");
     }
+
+    public void removerParticipante(Context ctx) {
+        ParticipanteService participanteService = ctx.appData(Keys.PARTICIPANTE_SERVICE.key());
+        String id = ctx.pathParam("id");
+        participanteService.removerParticipante(id);
+        ctx.redirect("/participantes");
+    }
 }
