@@ -14,6 +14,7 @@ public class ParticipanteController {
     }
 
     public void listarParticipantes(Context ctx) {
+        // não permite que o usuario possa acessar os participantes antes de fazer o login
         if (ctx.sessionAttribute("usuario") == null) {
             ctx.redirect("/login");
         } else {
@@ -33,7 +34,7 @@ public class ParticipanteController {
         Participante participante = new Participante();
 
         // string pra validar o nao uso dos caracteres espaciais
-        String caracteresindesejados = "^[a-zA-Z0-9 ]+$";
+        String caracteresindesejados = "^[\\p{L}0-9 ]+$";
 
         // Validação de Nome
         String nome = ctx.formParam("nome");
