@@ -63,25 +63,25 @@ public class ParticipanteController {
 
         // Validação de CPF
         String cpf = ctx.formParam("cpf");
-        if (cpf == null || cpf.trim().isEmpty() || !cpf.matches("\\d{11}")) {
+        if (cpf == null || cpf.trim().isEmpty() || cpf.matches("\\d{14}")) {
             throw new BadRequestResponse("O CPF deve conter 11 dígitos e não pode estar vazio.");
         }
 
         // Validação de RG
         String rg = ctx.formParam("rg");
-        if (rg == null || rg.trim().isEmpty() || !rg.matches("\\d{5,12}")) {
+        if (rg == null || rg.trim().isEmpty() || rg.matches("\\d{5,12}")) {
             throw new BadRequestResponse("O RG deve conter entre 5 e 12 dígitos e não pode estar vazio.");
         }
 
         // Validação de Sexo
         String sexo = ctx.formParam("sexo");
-        if (sexo == null || sexo.trim().isEmpty() || !(sexo.equals("Masculino") || sexo.equals("Feminino") || sexo.equals("Outro"))) {
+        if (sexo == null || sexo.trim().isEmpty()) {
             throw new BadRequestResponse("O sexo deve ser M, F ou Outro e não pode estar vazio.");
         }
 
         // Validação de Curso
         String curso = ctx.formParam("curso");
-        if (curso == null || curso.trim().isEmpty() || !curso.matches(caracteresindesejados)) {
+        if (curso == null || curso.trim().isEmpty()) {
             throw new BadRequestResponse("O curso não pode ser vazio e não deve conter caracteres especiais.");
         }
 
