@@ -13,9 +13,13 @@ import java.time.LocalDate;
 public class ProjetoController {
 
     public void listarProjetos(Context ctx) {
-        ProjetoService projetoService = ctx.appData(Keys.PROJETO_SERVICE.key());
-        ctx.attribute("projetos", projetoService.listarProjetos());
-        ctx.render("/projetos/lista_projetos.html");
+        if (ctx.sessionAttribute("usuario") == null) {
+            ctx.redirect("/login");
+        } else {
+            ProjetoService projetoService = ctx.appData(Keys.PROJETO_SERVICE.key());
+            ctx.attribute("projetos", projetoService.listarProjetos());
+            ctx.render("/projetos/lista_projetos.html");
+        }
     }
 
     public void mostrarFormulario(Context ctx) {

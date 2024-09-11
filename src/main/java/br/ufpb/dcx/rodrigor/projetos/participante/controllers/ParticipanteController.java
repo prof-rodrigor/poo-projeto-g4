@@ -14,9 +14,13 @@ public class ParticipanteController {
     }
 
     public void listarParticipantes(Context ctx) {
-        ParticipanteService participanteService = ctx.appData(Keys.PARTICIPANTE_SERVICE.key());
-        ctx.attribute("participantes", participanteService.listarParticipantes());
-        ctx.render("/participantes/lista_participantes.html");
+        if (ctx.sessionAttribute("usuario") == null) {
+            ctx.redirect("/login");
+        } else {
+            ParticipanteService participanteService = ctx.appData(Keys.PARTICIPANTE_SERVICE.key());
+            ctx.attribute("participantes", participanteService.listarParticipantes());
+            ctx.render("/participantes/lista_participantes.html");
+        }
     }
 
     public void mostrarFormularioCadastro(Context ctx) {
