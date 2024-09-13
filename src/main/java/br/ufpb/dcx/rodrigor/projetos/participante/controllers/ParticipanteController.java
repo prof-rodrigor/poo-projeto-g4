@@ -14,9 +14,14 @@ public class ParticipanteController {
     }
 
     public void listarParticipantes(Context ctx) {
-        ParticipanteService participanteService = ctx.appData(Keys.PARTICIPANTE_SERVICE.key());
-        ctx.attribute("participantes", participanteService.listarParticipantes());
-        ctx.render("/participantes/lista_participantes.html");
+        // não permite que o usuario possa acessar os participantes antes de fazer o login
+        if (ctx.sessionAttribute("usuario") == null) {
+            ctx.redirect("/login");
+        } else {
+            ParticipanteService participanteService = ctx.appData(Keys.PARTICIPANTE_SERVICE.key());
+            ctx.attribute("participantes", participanteService.listarParticipantes());
+            ctx.render("/participantes/lista_participantes.html");
+        }
     }
 
     public void mostrarFormularioCadastro(Context ctx) {
@@ -29,7 +34,7 @@ public class ParticipanteController {
         Participante participante = new Participante();
 
         // string pra validar o nao uso dos caracteres espaciais
-        String caracteresindesejados = "^[a-zA-Z0-9 ]+$";
+        String caracteresindesejados = "^[\\p{L}0-9 ]+$";
 
         // Validação de Nome
         String nome = ctx.formParam("nome");
