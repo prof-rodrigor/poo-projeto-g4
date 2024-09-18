@@ -50,11 +50,11 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="cpf" class="form-label">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" minlength="14" maxlength="14" title="Insira um CPF válido COM formatação." required pattern="\d{3}(\.\d{3}){2}-\d{2}" placeholder="000.000.000-00">
+                <input type="text" class="form-control" id="cpf" name="cpf" minlength="14" maxlength="14" title="Insira um CPF válido COM formatação [123.456.789-00]." required pattern="\d{3}(\.\d{3}){2}-\d{2}" placeholder="000.000.000-00">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="rg" class="form-label">RG</label>
-                <input type="text" class="form-control" id="rg" name="rg" minlength="13" maxlength="13" pattern="\d{2}\.\d{3}\.\d{3}-\d{2}" title="Insira um RG válido com pontos e hífen, apenas valores NUMÉRICOS [Ex: 00.000.000-00]." required placeholder="00.000.000-00">
+                <input type="tel" class="form-control" id="rg" name="rg" minlength="9" maxlength="12" title="Insira um RG válido, apenas valores NUMÉRICOS." required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="orgaoExpedidor" class="form-label">Órgão Expedidor</label>
@@ -116,7 +116,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="numero" class="form-label">Número</label>
-                <input type="number" class="form-control" id="numero" name="numero" required>
+                <input type="tel" class="form-control" id="numero" name="numero" required>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
