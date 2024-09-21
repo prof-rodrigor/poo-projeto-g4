@@ -5,6 +5,7 @@ import br.ufpb.dcx.rodrigor.projetos.participante.model.CategoriaParticipante;
 import br.ufpb.dcx.rodrigor.projetos.participante.model.Participante;
 import br.ufpb.dcx.rodrigor.projetos.participante.services.ParticipanteService;
 import io.javalin.http.Context;
+import io.javalin.http.HttpStatus;
 import org.bson.types.ObjectId;
 import io.javalin.http.BadRequestResponse;
 
@@ -204,4 +205,41 @@ public class ParticipanteController {
         participanteService.removerParticipante(id);
         ctx.redirect("/participantes");
     }
+
+    // participantes em json
+    public void participantesPorCategoria(Context ctx) {
+        ParticipanteService participanteService = ctx.appData(Keys.PARTICIPANTE_SERVICE.key());
+        String categoriaParam = ctx.queryParam("categoria");
+
+        if (categoriaParam != null) {
+            try {
+                CategoriaParticipante categoria = CategoriaParticipante.valueOf(categoriaParam.toUpperCase());
+                var participantes = participanteService.listarParticipantesPorCategoria(categoria);
+                if (participantes.isEmpty()) {
+                    ctx.status(HttpStatus.NOT_FOUND).result("Nenhum participante encontrado para a categoria: " + categoriaParam);
+                } else {
+                    ctx.json(participantes);
+                }
+            } catch (IllegalArgumentException e) {
+                ctx.status(HttpStatus.BAD_REQUEST).result("Categoria inválida: " + categoriaParam);
+            }
+        } else {
+            ctx.json(participanteService.listarParticipantes());
+        }
+    }
+
+    // v1/participantes/<id>
+    public void participantePorId(Context ctx) {
+        ParticipanteService participanteService = ctx.appData(Keys.PARTICIPANTE_SERVICE.key());
+        String id = ctx.pathParam("id");
+        var participante = participanteService.buscarParticipantePorId(id);
+        if (participante.isPresent()) {
+            ctx.json(participante.get());
+        } else {
+            ctx.status(HttpStatus.NOT_FOUND)
+                    .contentType("application/json")
+                    .result("{\"message\": \"Participante não encontrado para o id: " + id + "\"}");
+        }
+    }
+
 }
