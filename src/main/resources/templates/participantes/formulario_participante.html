@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="telefone" class="form-label">Telefone</label>
-                <input type="tel" class="form-control" id="telefone" name="telefone" minlength="9" maxlength="15" title="Insira um telefone válido." required>
+                <input type="tel" class="form-control" id="telefone" name="telefone" minlength="9" maxlength="20" title="Insira um telefone válido" required pattern="\+?[\d\s\-\(\)]+" placeholder="+YY (XX) XXXXX-XXXX ou (XX) 9XXXX-XXXX">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="categoria" class="form-label">Categoria</label>
@@ -50,11 +50,11 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="cpf" class="form-label">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" minlength="14" maxlength="14" title="Insira um CPF válido COM formatação [123.456.789-00]." required pattern="\d{3}(\.\d{3}){2}-\d{2}" placeholder="000.000.000-00">
+                <input type="text" class="form-control" id="cpf" name="cpf" minlength="14" maxlength="14" title="Insira um CPF válido COM formatação (123.456.789-0)." required pattern="\d{3}(\.\d{3}){2}-\d{2}" placeholder="000.000.000-00">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="rg" class="form-label">RG</label>
-                <input type="tel" class="form-control" id="rg" name="rg" minlength="9" maxlength="12" title="Insira um RG válido, apenas valores NUMÉRICOS." required placeholder="00.000.000-0">
+                <input type="tel" class="form-control" id="rg" name="rg" minlength="7" maxlength="11" title="Insira um RG válido com 7 OU 11 dígitos numéricos." required pattern="\d{7}|\d{11}" placeholder="0000000 ou 12345678900">
             </div>
             <div class="col-md-6 mb-3">
                 <label for="orgaoExpedidor" class="form-label">Órgão Expedidor</label>
@@ -70,22 +70,22 @@
             </div>
         </div>
         <div class="row">
-            <h4 class="mt-2">Redes Sociais: </h4>
+            <h4 class="mt-2">Redes Sociais (Insira apenas os LINKS): </h4>
             <div class="col-md-6 mb-3">
                 <label for="instagram" class="form-label">Instagram</label>
-                <input type="text" class="form-control" id="instagram" name="instagram" required maxlength="25">
+                <input type="text" class="form-control" id="instagram" name="instagram" required maxlength="45">
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="linkedIn" class="form-label">LinkedIn</label>
-                <input type="text" class="form-control" id="linkedIn" name="linkedIn" required maxlength="25">
+                <input type="text" class="form-control" id="linkedIn" name="linkedIn" required maxlength="50">
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="github" class="form-label">GitHub</label>
-                <input type="text" class="form-control" id="github" name="github" required maxlength="25">
+                <input type="text" class="form-control" id="github" name="github" required maxlength="55">
             </div>
         </div>
         <div class="row">
@@ -116,7 +116,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="numero" class="form-label">Número</label>
-                <input type="tel" class="form-control" id="numero" name="numero" required>
+                <input type="tel" class="form-control" id="numero" name="numero" required title="Insira apenas valores numéricos" pattern="\d+">
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </div>

@@ -58,8 +58,8 @@ public class ParticipanteController {
 
             // Validação de Telefone
             String telefone = ctx.formParam("telefone");
-            if (telefone == null || telefone.trim().isEmpty() || !telefone.matches("^\\+?\\d{9,15}$")) {
-                throw new BadRequestResponse("O telefone fornecido não é válido. Use um número com entre 9 e 15 dígitos.");
+            if (telefone == null || telefone.trim().isEmpty() || !telefone.matches("^\\+?[\\d\\s\\-\\(\\)]{9,20}$")) {
+                throw new BadRequestResponse("O telefone fornecido não é válido. Use um número com entre 9 e 20 dígitos.");
             }
 
             // Validação de Matrícula
