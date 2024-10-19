@@ -1,15 +1,18 @@
 package br.ufpb.dcx.rodrigor.projetos.form.controller;
 
 import br.ufpb.dcx.rodrigor.projetos.Keys;
+import br.ufpb.dcx.rodrigor.projetos.form.model.Campo;
 import br.ufpb.dcx.rodrigor.projetos.form.model.Formulario;
 import br.ufpb.dcx.rodrigor.projetos.form.model.ResultadoValidacao;
 import br.ufpb.dcx.rodrigor.projetos.form.services.FormService;
+import br.ufpb.dcx.rodrigor.projetos.participante.model.CategoriaParticipante;
 import io.javalin.http.Context;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FormController {
@@ -20,9 +23,11 @@ public class FormController {
 
     public void abrirFormulario(Context ctx) {
         FormService formService = ctx.appData(Keys.FORM_SERVICE.key());
-        String formId = ctx.pathParam("formId");
-        Formulario form = formService.getFormulario(formId);
+        Formulario form = formService.getFormulario("participante");
         ctx.attribute("form", form);
+
+        ctx.attribute("campos", form.getCampos());
+
         ctx.render("/forms/formulario.html");
     }
 

@@ -11,9 +11,9 @@
     <form th:action="@{/form/{formId}(formId=${form.id})}" method="post">
         <div th:each="campo : ${form.campos}">
             <div th:if="${campo.id == 'categoria'}">
+            </div>
                 <!-- Inclui o conteúdo de campoEspecial.html -->
                 <div th:insert="~{campoEspecial :: categoria}"></div>
-            </div>
             <div th:if="${campo.id != 'categoria'}" class="form-group">
                 <label th:for="${campo.id}" th:text="${campo.label}">Campo</label>
                 <input type="text" class="form-control" th:id="${campo.id}" th:name="${campo.id}" th:value="${campo.valor}">
