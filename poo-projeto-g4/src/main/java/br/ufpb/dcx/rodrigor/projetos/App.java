@@ -163,6 +163,12 @@ public class App {
     }
 
     private void configurarRotas(Javalin app) {
+        // tentativa 57
+        FormService formService = new FormService(); // Instância direta
+
+        FormController formController = new FormController(formService);
+
+        // Rotas de login e logout
         LoginController loginController = new LoginController();
         app.get("/", ctx -> ctx.redirect("/login"));
         app.get("/login", loginController::mostrarPaginaLogin);
@@ -176,10 +182,6 @@ public class App {
                 ctx.render("area_interna.html");
             }
         });
-
-        // Modificação para tentar instanciar FormController
-        FormService formService = app.appData(Keys.FORM_SERVICE.key());
-        FormController formController = new FormController(formService);
 
         // Rotas do formulário
         app.get("/formularios/{formId}", formController::abrirFormulario);
@@ -204,7 +206,6 @@ public class App {
         app.get("/v1/ping", pingController::ping);
         app.get("/ping", pingController::mostrarPaginaPing);
     }
-
     private Properties carregarPropriedades() {
         Properties prop = new Properties();
         try (InputStream input = App.class.getClassLoader().getResourceAsStream("application.properties")) {
