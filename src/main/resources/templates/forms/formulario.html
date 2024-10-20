@@ -9,7 +9,8 @@
 <div class="container mt-4">
     <h1 class="mb-4" th:text="${form.nome}">Título Form</h1>
 
-    <form th:action="@{/form/{formId}(formId=${form.id})}" method="post">
+    <!-- Verifica se o form.id não é nulo ou vazio -->
+    <form th:if="${form.id != null}" th:action="@{/form/{formId}(formId=${form.id})}" method="post">
         <div class="row">
             <div th:each="campo : ${form.campos}">
                 <!-- Verifica se o campo é "categoria" -->
@@ -31,6 +32,11 @@
 
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
+
+    <!-- Caso o form.id seja nulo, exibe uma mensagem de erro -->
+    <div th:if="${form.id == null}" class="alert alert-danger">
+        ID do formulário não encontrado.
+    </div>
 </div>
 </body>
 </html>

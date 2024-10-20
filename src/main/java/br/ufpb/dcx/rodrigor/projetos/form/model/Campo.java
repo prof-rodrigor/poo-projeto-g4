@@ -48,11 +48,14 @@ public class   Campo {
         this.valor = valor;
     }
 
-    public ResultadoValidacao validar(){
-        if(this.obrigatorio && (this.valor == null || this.valor.isEmpty())){
-            return new ResultadoValidacao("Campo obrigatório");
+    public ResultadoValidacao validar() {
+        // Verifica se o campo é obrigatório e está vazio
+        if (this.obrigatorio && (this.valor == null || this.valor.isEmpty())) {
+            return new ResultadoValidacao("Campo obrigatório.", false);
         }
-        return validador.validarCampo(this.valor);
+
+        // Valida o valor do campo usando o validador
+        return validador.validar(this.valor);
     }
 
 

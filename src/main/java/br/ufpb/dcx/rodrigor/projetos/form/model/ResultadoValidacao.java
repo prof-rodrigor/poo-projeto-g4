@@ -1,30 +1,21 @@
 package br.ufpb.dcx.rodrigor.projetos.form.model;
 
 public class ResultadoValidacao {
-
     private final String mensagem;
-    private boolean ok;
+    private final boolean ok;
 
-    public ResultadoValidacao(String mensagem) {
+    // Construtor para mensagens personalizadas
+    public ResultadoValidacao(String mensagem, boolean ok) {
         this.mensagem = mensagem;
-        this.ok = false;
-    }
-
-    public ResultadoValidacao() {
-        this.mensagem = "";
-        this.ok = true;
-    }
-
-    public ResultadoValidacao(boolean ok) {
-        this.mensagem = "";
         this.ok = ok;
     }
+
 
     public String getMensagem() {
         return mensagem;
     }
 
-    public boolean ok() {
+    public boolean isOk() {
         return ok;
     }
 }

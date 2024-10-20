@@ -190,11 +190,11 @@ public class App {
 
         FormController formController = new FormController();
         app.get("/participantes/novo", formController::abrirFormulario);
+        app.post("/form/{formId}", formController::validarFormulario); // Rota adicionada para validar o formulário
 
         PingController pingController = new PingController();
         app.get("/v1/ping", pingController::ping);
         app.get("/ping", pingController::mostrarPaginaPing);
-
     }
 
     private Properties carregarPropriedades() {
