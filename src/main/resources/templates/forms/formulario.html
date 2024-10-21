@@ -19,8 +19,35 @@
                     <div th:insert="~{campoEspecial :: categoria}"></div>
                 </div>
 
-                <!-- Verifica se o campo NÃO é "categoria" -->
-                <div th:if="${campo.id != 'categoria'}" class="col-md-6 mb-3">
+                <!-- Verifica se o campo é "sexo" -->
+                <div th:if="${campo.id == 'sexo'}" class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label th:for="${campo.id}" th:text="${campo.label}">Sexo</label>
+                        <select class="form-control" th:id="${campo.id}" th:name="${campo.id}">
+                            <option value="" disabled selected>Selecione uma opção...</option> <!-- Opção padrão -->
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMININO">Feminino</option>
+                            <option value="OUTRO">Outro</option>
+                        </select>
+                        <div class="text-danger" th:if="${erros != null and erros[campo.id] != null}" th:text="${erros[campo.id].mensagem}">Erro</div>
+                    </div>
+                </div>
+
+                <!-- Verifica se o campo é "curso" -->
+                <div th:if="${campo.id == 'curso'}" class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label th:for="${campo.id}" th:text="${campo.label}">Curso</label>
+                        <select class="form-control" th:id="${campo.id}" th:name="${campo.id}">
+                            <option value="" disabled selected>Selecione uma opção...</option> <!-- Opção padrão -->
+                            <option value="SI">Sistemas de Informação</option>
+                            <option value="CC">Ciência da Computação</option>
+                        </select>
+                        <div class="text-danger" th:if="${erros != null and erros[campo.id] != null}" th:text="${erros[campo.id].mensagem}">Erro</div>
+                    </div>
+                </div>
+
+                <!-- Verifica se o campo NÃO é "categoria" ou "sexo" ou "curso" -->
+                <div th:if="${campo.id != 'categoria' and campo.id != 'sexo' and campo.id != 'curso'}" class="col-md-6 mb-3">
                     <div class="form-group">
                         <label th:for="${campo.id}" th:text="${campo.label}">Campo</label>
                         <input type="text" class="form-control" th:id="${campo.id}" th:name="${campo.id}" th:value="${campo.valor}">

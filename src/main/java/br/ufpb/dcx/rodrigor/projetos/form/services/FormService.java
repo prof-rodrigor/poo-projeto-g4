@@ -34,13 +34,14 @@ public class FormService {
         participante.addCampo(new Campo("categoria", "Categoria", new ValidadorTexto(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("matricula", "Matrícula", new ValidadorTexto(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("curso", "Curso", new ValidadorTexto(), true)); // ValidadorTexto sem limites
-        participante.addCampo(new Campo("periodoEntrada", "Período de Entrada", new ValidadorTexto(), true)); // ValidadorTexto sem limites
+        participante.addCampo(new Campo("periodoEntrada", "Período de Entrada", new ValidadorPeriodoEntrada(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("cpf", "CPF", new ValidadorCPF(), true));
         participante.addCampo(new Campo("rg", "RG", new ValidadorTexto(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("orgaoExpedidor", "Órgão Expedidor", new ValidadorTexto(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("sexo", "Sexo", new ValidadorTexto(), true, "")); // ValidadorTexto sem limites
         participante.addCampo(new Campo("linkedin", "LinkedIn", new ValidadorLinkedin(), false));
         participante.addCampo(new Campo("github", "GitHub", new ValidadorGithub(), false));
+        participante.addCampo(new Campo("instagram", "Instagram", new ValidadorInstagram(), false));
         participante.addCampo(new Campo("endereco", "Endereço", new ValidadorTexto(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("estado", "Estado", new ValidadorTexto(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("cidade", "Cidade", new ValidadorTexto(), true)); // ValidadorTexto sem limites

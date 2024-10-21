@@ -48,8 +48,10 @@ public class ValidadorCPF implements ValidadorCampo {
 
     private int calcularDigitoVerificador(String cpf, int peso) {
         int soma = 0;
+        int pesoTemp = peso;  // Variável temporária para decrementar o peso
         for (int i = 0; i < peso - 1; i++) {
-            soma += Character.getNumericValue(cpf.charAt(i)) * peso--;
+            soma += Character.getNumericValue(cpf.charAt(i)) * pesoTemp;
+            pesoTemp--;  // Decrementar o peso temporário, sem alterar o original
         }
         int resto = soma % 11;
         return resto < 2 ? 0 : 11 - resto;

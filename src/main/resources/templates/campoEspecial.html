@@ -7,9 +7,13 @@
 <body>
 <!-- Fragmento que será incluído em outro template -->
 <div th:fragment="categoria">
-    <label for="categoria"></label>
-    <textarea id="categoria" name="categoria" class="form-control">
-    </textarea>
+    <label for="categoria">Selecione a Categoria:</label>
+    <select id="categoria" name="categoria" class="form-control">
+        <option value="ALUNO">Aluno</option>
+        <option value="PROFESSOR">Professor</option>
+        <option value="TECNICO_ADMINISTRATIVO">Técnico Administrativo</option>
+        <option value="OUTRO">Outro</option>
+    </select>
 </div>
 </body>
 </html>
