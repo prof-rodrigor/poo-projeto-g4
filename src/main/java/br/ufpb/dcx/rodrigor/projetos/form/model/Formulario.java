@@ -16,7 +16,7 @@ public class Formulario {
     }
 
     public void addCampo(Campo campo){
-        campos.put(campo.getId(), campo);
+            campos.put(campo.getId(), campo);
     }
 
     public Campo getCampo(String id){

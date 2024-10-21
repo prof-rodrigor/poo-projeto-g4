@@ -12,8 +12,10 @@ public class ValidadorLinkedin implements ValidadorCampo {
 
     @Override
     public ResultadoValidacao validar(String valor) {
+
+        // Pode ficar vazio, já que é um campo opcional
         if (valor == null || valor.isEmpty()) {
-            return new ResultadoValidacao("O campo não pode estar vazio.", false);
+            return new ResultadoValidacao("", true);
         }
 
         // Regex para validar link do LinkedIn

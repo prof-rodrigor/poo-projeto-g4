@@ -70,7 +70,7 @@ public class App {
         ParticipanteService participanteService = new ParticipanteService(mongoDBConnector);
         config.appData(Keys.PROJETO_SERVICE.key(), new ProjetoService(mongoDBConnector, participanteService));
         config.appData(Keys.PARTICIPANTE_SERVICE.key(), participanteService);
-        FormService formService = new FormService();
+        FormService formService = new FormService(mongoDBConnector);
         config.appData(Keys.FORM_SERVICE.key(), formService);
     }
     private void configurarPaginasDeErro(Javalin app) {
@@ -191,6 +191,7 @@ public class App {
         FormController formController = new FormController();
         app.get("/participantes/novo", formController::abrirFormulario);
         app.post("/form/{formId}", formController::validarFormulario); // Rota adicionada para validar o formulário
+
 
         PingController pingController = new PingController();
         app.get("/v1/ping", pingController::ping);

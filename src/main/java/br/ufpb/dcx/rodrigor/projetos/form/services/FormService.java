@@ -1,23 +1,44 @@
 package br.ufpb.dcx.rodrigor.projetos.form.services;
 
+import br.ufpb.dcx.rodrigor.projetos.AbstractService;
+import br.ufpb.dcx.rodrigor.projetos.db.MongoDBConnector;
 import br.ufpb.dcx.rodrigor.projetos.form.model.Campo;
 import br.ufpb.dcx.rodrigor.projetos.form.model.Formulario;
 import br.ufpb.dcx.rodrigor.projetos.form.model.validadoresPLUS.*;
+import br.ufpb.dcx.rodrigor.projetos.participante.model.Participante;
+import br.ufpb.dcx.rodrigor.projetos.participante.services.ParticipanteService;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FormService {
+import static com.mongodb.client.model.Filters.eq;
+
+public class FormService extends AbstractService  {
 
     private final Map<String, Formulario> formularios = new LinkedHashMap<>();
+    private final MongoCollection<Document> collection;
+    ParticipanteService participanteService;
 
 
-    public FormService(){
+    public FormService(MongoDBConnector mongoDBConnector){
+        super(mongoDBConnector);
+        MongoDatabase database = mongoDBConnector.getDatabase("projetos");
+        this.collection = database.getCollection("participantes");
+        participanteService = new ParticipanteService(mongoDBConnector);
         iniciarFormularios();
     }
 
     public Formulario getFormulario(String id){
         return formularios.get(id);
+    }
+
+    public void adicionarParticipanteAoFormulario(Participante participante) {
+        // Lógica para adicionar participante ao formulário usando participanteService
+        participanteService.adicionarParticipante(participante);
     }
 
     public void iniciarFormularios() {
@@ -42,7 +63,8 @@ public class FormService {
         participante.addCampo(new Campo("linkedin", "LinkedIn", new ValidadorLinkedin(), false));
         participante.addCampo(new Campo("github", "GitHub", new ValidadorGithub(), false));
         participante.addCampo(new Campo("instagram", "Instagram", new ValidadorInstagram(), false));
-        participante.addCampo(new Campo("endereco", "Endereço", new ValidadorTexto(), true)); // ValidadorTexto sem limites
+        participante.addCampo(new Campo("rua", "Rua", new ValidadorTexto(), true)); // ValidadorTexto sem limites
+        participante.addCampo(new Campo("pais", "País", new ValidadorTexto(), true));
         participante.addCampo(new Campo("estado", "Estado", new ValidadorTexto(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("cidade", "Cidade", new ValidadorTexto(), true)); // ValidadorTexto sem limites
         participante.addCampo(new Campo("cep", "CEP", new ValidadorNUMERO(), true)); // Ajustado para usar ValidadorNUMERO
