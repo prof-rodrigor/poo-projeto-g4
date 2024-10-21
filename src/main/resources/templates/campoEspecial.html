@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Campo Especial</title>
+</head>
+<body>
+<!-- Fragmento que será incluído em outro template -->
+<div th:fragment="categoria">
+    <label for="categoria">Selecione a Categoria:</label>
+    <select id="categoria" name="categoria" class="form-control">
+        <option value="ALUNO">Aluno</option>
+        <option value="PROFESSOR">Professor</option>
+        <option value="TECNICO_ADMINISTRATIVO">Técnico Administrativo</option>
+        <option value="OUTRO">Outro</option>
+    </select>
+</div>
+</body>
+</html>
