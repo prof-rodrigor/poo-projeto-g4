@@ -16,11 +16,11 @@ public class ValidadorTexto implements ValidadorCampo {
             return new ResultadoValidacao("O campo não pode ser vazio", false);
         }
 
-        // Regex para aceitar letras, acentos, espaços, sinais de pontuação e "ç"
-        String regex = "^[a-zA-Z0-9\\s.,;:!?'\"()\\[\\]{}\\-áéíóúãâêîôûçÇ]*$";
+        // Regex para aceitar apenas letras, acentos, espaços, sinais de pontuação e "ç"
+        String regex = "^[a-zA-Z\\s.,;:!?'\"()\\[\\]{}\\-áéíóúãâêîôûçÇ]*$";
 
         if (!valor.matches(regex)) {
-            return new ResultadoValidacao("O campo contém caracteres inválidos. Apenas letras, números, espaços e sinais de pontuação são permitidos.", false);
+            return new ResultadoValidacao("O campo deve conter apenas letras.", false);
         }
 
         return new ResultadoValidacao("Texto válido", true);
