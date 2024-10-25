@@ -4,6 +4,7 @@ import br.ufpb.dcx.rodrigor.projetos.db.MongoDBConnector;
 import br.ufpb.dcx.rodrigor.projetos.form.controller.FormController;
 import br.ufpb.dcx.rodrigor.projetos.form.services.FormService;
 import br.ufpb.dcx.rodrigor.projetos.login.LoginController;
+import br.ufpb.dcx.rodrigor.projetos.login.UsuarioService;
 import br.ufpb.dcx.rodrigor.projetos.participante.controllers.ParticipanteController;
 import br.ufpb.dcx.rodrigor.projetos.participante.services.ParticipanteService;
 import br.ufpb.dcx.rodrigor.projetos.ping.controllers.PingController;
@@ -58,6 +59,7 @@ public class App {
             System.exit(1);
         }
         config.appData(Keys.SERVICO_NOME.key(), nomeServico);
+        config.appData(Keys.USUARIO_SERVICE.key(), new UsuarioService(mongoDBConnector));
         // SERVICO HOST PING
         String hostPing = propriedades.getProperty("servico.ping.host");
         if(hostPing == null){
@@ -164,8 +166,9 @@ public class App {
         LoginController loginController = new LoginController();
         app.get("/", ctx -> ctx.redirect("/login"));
         app.get("/login", loginController::mostrarPaginaLogin);
-        app.post("/login", loginController::processarLogin);
+        app.post("/login", LoginController::processarLogin);
         app.get("/logout", loginController::logout);
+
 
         app.get("/area-interna", ctx -> {
             if (ctx.sessionAttribute("usuario") == null) {

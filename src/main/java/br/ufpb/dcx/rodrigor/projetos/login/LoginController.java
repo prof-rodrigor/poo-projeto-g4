@@ -1,5 +1,6 @@
 package br.ufpb.dcx.rodrigor.projetos.login;
 
+import br.ufpb.dcx.rodrigor.projetos.Keys;
 import io.javalin.http.Context;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,19 +20,28 @@ public class LoginController {
         ctx.render("login.html");
     }
 
-    public void processarLogin(Context ctx) {
+    public static void processarLogin(Context ctx) {
+        verificar(ctx);
+        logger.info(ctx);
+    }
+    public static void verificar(Context ctx) {
+        UsuarioService usuarioService = ctx.appData(Keys.USUARIO_SERVICE.key());
+        logger.info(usuarioService);
         String login = ctx.formParam("login");
         String senha = ctx.formParam("senha");
-
-        if (usuarioExemplo.getLogin().equals(login) && usuarioExemplo.getSenha().equals(senha)) {
-            ctx.sessionAttribute("usuario", usuarioExemplo);
-            logger.info("Usuário '{}' autenticado com sucesso.", login);
+        logger.info("tentando Autenticar o usuário com login: " + login);
+        Usuario usuario = usuarioService.buscarUsuario(login, senha);
+        if (usuario != null) {
+            logger.info("Usuário autenticado com sucesso");
+            ctx.sessionAttribute("usuario", usuario);
             ctx.redirect("/area-interna");
         } else {
-            logger.warn("Tentativa de login falhou para o usuário: {}", login);
             ctx.redirect("/login");
         }
     }
+
+
+
 
     public void logout(Context ctx) {
         ctx.sessionAttribute("usuario", null);
