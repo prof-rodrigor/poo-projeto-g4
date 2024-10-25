@@ -1,9 +1,13 @@
 package br.ufpb.dcx.rodrigor.projetos;
 
 import br.ufpb.dcx.rodrigor.projetos.db.MongoDBConnector;
+import br.ufpb.dcx.rodrigor.projetos.form.controller.FormController;
+import br.ufpb.dcx.rodrigor.projetos.form.services.FormService;
 import br.ufpb.dcx.rodrigor.projetos.login.LoginController;
+import br.ufpb.dcx.rodrigor.projetos.login.UsuarioService;
 import br.ufpb.dcx.rodrigor.projetos.participante.controllers.ParticipanteController;
 import br.ufpb.dcx.rodrigor.projetos.participante.services.ParticipanteService;
+import br.ufpb.dcx.rodrigor.projetos.ping.controllers.PingController;
 import br.ufpb.dcx.rodrigor.projetos.projeto.controllers.ProjetoController;
 import br.ufpb.dcx.rodrigor.projetos.projeto.services.ProjetoService;
 import io.javalin.Javalin;
@@ -17,6 +21,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.Normalizer;
 import java.util.Properties;
 import java.util.function.Consumer;
 
@@ -26,6 +31,7 @@ public class App {
     private static final int PORTA_PADRAO = 8000;
     private static final String PROP_PORTA_SERVIDOR = "porta.servidor";
     private static final String PROP_MONGODB_CONNECTION_STRING = "mongodb.connectionString";
+    private static final String SERVICO_NOME = "servico.nome";
 
     private final Properties propriedades;
     private MongoDBConnector mongoDBConnector = null;
@@ -46,9 +52,28 @@ public class App {
         });
     }
     private void registrarServicos(JavalinConfig config, MongoDBConnector mongoDBConnector) {
+        // SERVICE NOME
+        String nomeServico = propriedades.getProperty(SERVICO_NOME);
+        if (nomeServico == null) {
+            logger.error("Defina a propriedade '{}' no arquivo propriedades", SERVICO_NOME);
+            System.exit(1);
+        }
+        config.appData(Keys.SERVICO_NOME.key(), nomeServico);
+        config.appData(Keys.USUARIO_SERVICE.key(), new UsuarioService(mongoDBConnector));
+        // SERVICO HOST PING
+        String hostPing = propriedades.getProperty("servico.ping.host");
+        if(hostPing == null){
+            logger.error("Defina o host do serviço ping no arquivo de propriedades.");
+            logger.error("exemplo: 'servico.ping.host=https://localhost:8004'");
+            System.exit(1);
+        }
+        config.appData(Keys.SERVICO_PING_HOST.key(), hostPing);
+
         ParticipanteService participanteService = new ParticipanteService(mongoDBConnector);
         config.appData(Keys.PROJETO_SERVICE.key(), new ProjetoService(mongoDBConnector, participanteService));
         config.appData(Keys.PARTICIPANTE_SERVICE.key(), participanteService);
+        FormService formService = new FormService(mongoDBConnector);
+        config.appData(Keys.FORM_SERVICE.key(), formService);
     }
     private void configurarPaginasDeErro(Javalin app) {
         app.error(404, ctx -> ctx.render("erro_404.html"));
@@ -141,8 +166,9 @@ public class App {
         LoginController loginController = new LoginController();
         app.get("/", ctx -> ctx.redirect("/login"));
         app.get("/login", loginController::mostrarPaginaLogin);
-        app.post("/login", loginController::processarLogin);
+        app.post("/login", LoginController::processarLogin);
         app.get("/logout", loginController::logout);
+
 
         app.get("/area-interna", ctx -> {
             if (ctx.sessionAttribute("usuario") == null) {
@@ -160,10 +186,19 @@ public class App {
 
         ParticipanteController participanteController = new ParticipanteController();
         app.get("/participantes", participanteController::listarParticipantes);
-        app.get("/participantes/novo", participanteController::mostrarFormularioCadastro);
         app.post("/participantes", participanteController::adicionarParticipante);
         app.get("/participantes/{id}/remover", participanteController::removerParticipante);
+        app.get("/v1/participantes", participanteController::participantesPorCategoria);
+        app.get("/v1/participantes/{id}", participanteController::participantePorId);
 
+        FormController formController = new FormController();
+        app.get("/participantes/novo", formController::abrirFormulario);
+        app.post("/form/{formId}", formController::validarFormulario); // Rota adicionada para validar o formulário
+
+
+        PingController pingController = new PingController();
+        app.get("/v1/ping", pingController::ping);
+        app.get("/ping", pingController::mostrarPaginaPing);
     }
 
     private Properties carregarPropriedades() {

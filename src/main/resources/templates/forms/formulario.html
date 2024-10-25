@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title th:text="${form.nome}">Formulário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.7/inputmask.min.js"></script>
+</head>
+<body>
+<section>
+    <h2 class="mt-5" th:text="${form.nome}">Título Form</h2>
+
+    <form th:if="${form.id != null}" th:action="@{/form/{formId}(formId=${form.id})}" method="post">
+        <div class="row">
+            <div th:each="campo : ${form.campos}">
+                <!-- Campo Categoria -->
+                <div th:if="${campo.id == 'categoria'}" class="col-md-6 mb-3">
+                    <div th:insert="~{campoEspecial :: categoria}"></div>
+                </div>
+
+                <!-- Campo Sexo -->
+                <div th:if="${campo.id == 'sexo'}" class="col-md-6 mb-3">
+                    <label th:for="${campo.id}" th:text="${campo.label}">Sexo</label>
+                    <select class="form-select" th:id="${campo.id}" th:name="${campo.id}">
+                        <option value="" disabled selected>Selecione uma opção...</option>
+                        <option value="MASCULINO">Masculino</option>
+                        <option value="FEMININO">Feminino</option>
+                        <option value="OUTRO">Outro</option>
+                    </select>
+                    <div class="text-danger" th:if="${erros != null and erros[campo.id] != null}" th:text="${erros[campo.id].mensagem}">Erro</div>
+                </div>
+
+                <!-- Campo Curso -->
+                <div th:if="${campo.id == 'curso'}" class="col-md-6 mb-3">
+                    <label th:for="${campo.id}" th:text="${campo.label}">Curso</label>
+                    <select class="form-select" th:id="${campo.id}" th:name="${campo.id}">
+                        <option value="" disabled selected>Selecione uma opção...</option>
+                        <option value="SI">Sistemas de Informação</option>
+                        <option value="CC">Ciência da Computação</option>
+                    </select>
+                    <div class="text-danger" th:if="${erros != null and erros[campo.id] != null}" th:text="${erros[campo.id].mensagem}">Erro</div>
+                </div>
+
+                <!-- Outros Campos -->
+                <div th:if="${campo.id != 'categoria' and campo.id != 'sexo' and campo.id != 'curso'}" class="col-md-6 mb-3">
+                    <label th:for="${campo.id}" th:text="${campo.label}">Campo</label>
+                    <input type="text" class="form-control" th:id="${campo.id}" th:name="${campo.id}" th:value="${campo.valor}">
+                    <div class="text-danger" th:if="${erros != null and erros[campo.id] != null}" th:text="${erros[campo.id].mensagem}">Erro</div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+    <!-- Caso o form.id seja nulo, exibe uma mensagem de erro -->
+    <div th:if="${form.id == null}" class="alert alert-danger">
+        ID do formulário não encontrado.
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="PlaceHolder.js"></script>
+</body>
+</html>
